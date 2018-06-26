@@ -1,0 +1,396 @@
+{
+    "id": "1d060379-0f29-458a-aa7b-65cbaf23461e",
+    "name": "Kong",
+    "description": "",
+    "auth": null,
+    "events": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "id": "69dba06e-4a51-4993-944f-8a210423dcba",
+                "type": "text\/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "id": "463602c4-5c61-46b8-b329-5336761c3fcc",
+                "type": "text\/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ],
+    "variables": null,
+    "order": [
+        "6402eff7-6bd9-4f75-94a7-70fa1c5c5401",
+        "084fbf18-8ffe-409b-b65c-bed9b66f9473",
+        "b51f48b6-e205-4f54-976d-b879af788022",
+        "2fe6ca49-2f07-447b-95f3-5c38d499df8d",
+        "fedcfdd0-1479-420d-b2de-ec6ca82df0ed",
+        "edc7af5a-db1b-431a-a4b3-2174d6210f5b",
+        "fe8306b6-562e-4980-b9c8-206394a6d42a",
+        "df894a56-936a-4db6-8ae8-035d52744670",
+        "2ef6dca8-317d-4f4e-8736-acb34f6f2fbf",
+        "686ecebf-10e8-48f5-80ff-d97a5a3b7ca5",
+        "2d0bb6a4-8d48-4ce0-b0aa-4b96a4618a7e"
+    ],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "084fbf18-8ffe-409b-b65c-bed9b66f9473",
+            "name": "add a Service",
+            "url": "http:\/\/localhost:8001\/services\/",
+            "description": "",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": [
+                {
+                    "key": "Content-Type",
+                    "value": "application\/json",
+                    "description": "",
+                    "enabled": true
+                }
+            ],
+            "method": "POST",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "id": "48aae5ca-0170-48fd-afc1-ab78d2617952",
+                        "type": "text\/javascript",
+                        "exec": [
+                            "if (responseCode.code != 201) {",
+                            "    tests[\"Create a Service: failed\"] = false",
+                            "}",
+                            "else {",
+                            "    tests[\"Create a Service: created\"] = true",
+                            "",
+                            "    var jsonData = JSON.parse(responseBody);",
+                            "    if (jsonData.id === undefined) {",
+                            "        tests[\"Create a Service: cannot retreive identifier\"] = false",
+                            "    }",
+                            "    else {",
+                            "        var serviceId = jsonData.id;",
+                            "        postman.setEnvironmentVariable(\"_service\", serviceId);",
+                            "        tests[\"Create a Service: created with id:\" + serviceId] = true",
+                            "    }",
+                            "}",
+                            "    ",
+                            "    ",
+                            "    ",
+                            ""
+                        ]
+                    }
+                }
+            ],
+            "folder": null,
+            "preRequestScript": null,
+            "tests": "if (responseCode.code != 201) {\n    tests[\"Create a Service: failed\"] = false\n}\nelse {\n    tests[\"Create a Service: created\"] = true\n\n    var jsonData = JSON.parse(responseBody);\n    if (jsonData.id === undefined) {\n        tests[\"Create a Service: cannot retreive identifier\"] = false\n    }\n    else {\n        var serviceId = jsonData.id;\n        postman.setEnvironmentVariable(\"_service\", serviceId);\n        tests[\"Create a Service: created with id:\" + serviceId] = true\n    }\n}\n    \n    \n    \n",
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "1d060379-0f29-458a-aa7b-65cbaf23461e",
+            "rawModeData": "{\r\n  \"name\": \"minispark\",\r\n  \"url\": \"https:\/\/mini-spark.herokuapp.com\/\"\r\n}",
+            "headers": "Content-Type: application\/json\n",
+            "pathVariables": []
+        },
+        {
+            "id": "2d0bb6a4-8d48-4ce0-b0aa-4b96a4618a7e",
+            "name": "delete Service",
+            "url": "http:\/\/localhost:8001\/services\/{{_service}}",
+            "description": "",
+            "data": [],
+            "dataMode": "params",
+            "headerData": [],
+            "method": "DELETE",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "1d060379-0f29-458a-aa7b-65cbaf23461e",
+            "headers": "",
+            "pathVariables": []
+        },
+        {
+            "id": "2ef6dca8-317d-4f4e-8736-acb34f6f2fbf",
+            "name": "delete Plugin",
+            "url": "http:\/\/localhost:8001\/plugins\/{{_plugin}}",
+            "description": "",
+            "data": [],
+            "dataMode": "params",
+            "headerData": [],
+            "method": "DELETE",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "1d060379-0f29-458a-aa7b-65cbaf23461e",
+            "headers": "",
+            "pathVariables": []
+        },
+        {
+            "id": "2fe6ca49-2f07-447b-95f3-5c38d499df8d",
+            "name": "MiniSpark: \/tokens",
+            "url": "https:\/\/localhost:8443\/tokens",
+            "description": null,
+            "data": [],
+            "dataMode": "raw",
+            "headerData": [],
+            "method": "GET",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "1d060379-0f29-458a-aa7b-65cbaf23461e",
+            "rawModeData": "",
+            "headers": "",
+            "pathVariables": []
+        },
+        {
+            "id": "6402eff7-6bd9-4f75-94a7-70fa1c5c5401",
+            "name": "list Services",
+            "url": "http:\/\/localhost:8001\/services\/",
+            "description": "",
+            "data": [],
+            "dataMode": "params",
+            "headerData": [],
+            "method": "GET",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "1d060379-0f29-458a-aa7b-65cbaf23461e",
+            "headers": "",
+            "pathVariables": []
+        },
+        {
+            "id": "686ecebf-10e8-48f5-80ff-d97a5a3b7ca5",
+            "name": "delete Route",
+            "url": "http:\/\/localhost:8001\/routes\/{{_route}}",
+            "description": "",
+            "data": [],
+            "dataMode": "params",
+            "headerData": [],
+            "method": "DELETE",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "1d060379-0f29-458a-aa7b-65cbaf23461e",
+            "headers": "",
+            "pathVariables": []
+        },
+        {
+            "id": "b51f48b6-e205-4f54-976d-b879af788022",
+            "name": "test API proxy",
+            "url": "https:\/\/localhost:8443\/",
+            "description": null,
+            "data": [],
+            "dataMode": "raw",
+            "headerData": [],
+            "method": "GET",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "1d060379-0f29-458a-aa7b-65cbaf23461e",
+            "rawModeData": "",
+            "headers": "",
+            "pathVariables": []
+        },
+        {
+            "id": "df894a56-936a-4db6-8ae8-035d52744670",
+            "name": "MiniSpark: \/people\/me",
+            "url": "https:\/\/localhost:8443\/people\/me",
+            "description": null,
+            "data": [],
+            "dataMode": "raw",
+            "headerData": [
+                {
+                    "key": "Authorization",
+                    "value": "Bearer STEVE0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                    "description": "",
+                    "enabled": true
+                }
+            ],
+            "method": "GET",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "1d060379-0f29-458a-aa7b-65cbaf23461e",
+            "rawModeData": "",
+            "headers": "Authorization: Bearer STEVE0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ\n",
+            "pathVariables": []
+        },
+        {
+            "id": "edc7af5a-db1b-431a-a4b3-2174d6210f5b",
+            "name": "list Plugins",
+            "url": "http:\/\/localhost:8001\/services\/minispark\/plugins",
+            "description": null,
+            "data": [],
+            "dataMode": "params",
+            "headerData": [],
+            "method": "GET",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "1d060379-0f29-458a-aa7b-65cbaf23461e",
+            "headers": "",
+            "pathVariables": []
+        },
+        {
+            "id": "fe8306b6-562e-4980-b9c8-206394a6d42a",
+            "name": "add Plugin (Rate Limitation)",
+            "url": "http:\/\/localhost:8001\/services\/{{_service}}\/plugins",
+            "description": "",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": [
+                {
+                    "key": "Content-Type",
+                    "value": "application\/json",
+                    "description": "",
+                    "enabled": true
+                }
+            ],
+            "method": "POST",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "id": "da6d0e48-a138-4776-82b8-c994b3cc1613",
+                        "type": "text\/javascript",
+                        "exec": [
+                            "if (responseCode.code != 201) {",
+                            "    tests[\"Create a Plugin: failed\"] = false",
+                            "}",
+                            "else {",
+                            "    tests[\"Create a Plugin: created\"] = true",
+                            "",
+                            "    var jsonData = JSON.parse(responseBody);",
+                            "    if (jsonData.id === undefined) {",
+                            "        tests[\"Create a Plugin: cannot retreive identifier\"] = false",
+                            "    }",
+                            "    else {",
+                            "        var pluginId = jsonData.id;",
+                            "        postman.setEnvironmentVariable(\"_plugin\", pluginId);",
+                            "        tests[\"Create a Plugin: created with id:\" + pluginId] = true",
+                            "    }",
+                            "}",
+                            "    ",
+                            "    ",
+                            "    ",
+                            ""
+                        ]
+                    }
+                }
+            ],
+            "folder": null,
+            "preRequestScript": null,
+            "tests": "if (responseCode.code != 201) {\n    tests[\"Create a Plugin: failed\"] = false\n}\nelse {\n    tests[\"Create a Plugin: created\"] = true\n\n    var jsonData = JSON.parse(responseBody);\n    if (jsonData.id === undefined) {\n        tests[\"Create a Plugin: cannot retreive identifier\"] = false\n    }\n    else {\n        var pluginId = jsonData.id;\n        postman.setEnvironmentVariable(\"_plugin\", pluginId);\n        tests[\"Create a Plugin: created with id:\" + pluginId] = true\n    }\n}\n    \n    \n    \n",
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "1d060379-0f29-458a-aa7b-65cbaf23461e",
+            "rawModeData": "{\r\n    \"name\"            : \"rate-limiting\",\r\n    \r\n    \"config.second\"   : 1,\r\n    \"config.minute\"   : 3,\r\n    \r\n    \"config.limit_by\" : \"ip\",\r\n    \r\n    \"config.policy\"   : \"local\"\r\n}",
+            "headers": "Content-Type: application\/json\n",
+            "pathVariables": []
+        },
+        {
+            "id": "fedcfdd0-1479-420d-b2de-ec6ca82df0ed",
+            "name": "add a Route",
+            "url": "http:\/\/localhost:8001\/routes\/",
+            "description": "",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": [
+                {
+                    "key": "Content-Type",
+                    "value": "application\/json",
+                    "description": "",
+                    "enabled": true
+                }
+            ],
+            "method": "POST",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "id": "48ee1030-7496-4e71-92ea-48f9ba0272a6",
+                        "type": "text\/javascript",
+                        "exec": [
+                            "if (responseCode.code != 201) {",
+                            "    tests[\"Create a Route: failed\"] = false",
+                            "}",
+                            "else {",
+                            "    tests[\"Create a Route: created\"] = true",
+                            "",
+                            "    var jsonData = JSON.parse(responseBody);",
+                            "    if (jsonData.id === undefined) {",
+                            "        tests[\"Create a Route: cannot retreive identifier\"] = false",
+                            "    }",
+                            "    else {",
+                            "        var routeId = jsonData.id;",
+                            "        postman.setEnvironmentVariable(\"_route\", routeId);",
+                            "        tests[\"Create a Route: created with id:\" + routeId] = true",
+                            "    }",
+                            "}",
+                            "    ",
+                            "    ",
+                            "    ",
+                            ""
+                        ]
+                    }
+                }
+            ],
+            "folder": null,
+            "preRequestScript": null,
+            "tests": "if (responseCode.code != 201) {\n    tests[\"Create a Route: failed\"] = false\n}\nelse {\n    tests[\"Create a Route: created\"] = true\n\n    var jsonData = JSON.parse(responseBody);\n    if (jsonData.id === undefined) {\n        tests[\"Create a Route: cannot retreive identifier\"] = false\n    }\n    else {\n        var routeId = jsonData.id;\n        postman.setEnvironmentVariable(\"_route\", routeId);\n        tests[\"Create a Route: created with id:\" + routeId] = true\n    }\n}\n    \n    \n    \n",
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "1d060379-0f29-458a-aa7b-65cbaf23461e",
+            "rawModeData": "{\r\n  \"service\": \r\n    {  \r\n      \"id\": \"{{_service}}\"\r\n    },\r\n  \"protocols\": [\"https\"],\r\n  \"methods\": [\"GET\", \"POST\", \"PUT\", \"DELETE\"]\r\n}",
+            "headers": "Content-Type: application\/json\n",
+            "pathVariables": []
+        }
+    ]
+}
